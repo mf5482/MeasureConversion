@@ -9,7 +9,7 @@ const wei = ['1 Pound = 16 Ounces', '1 Kilometer = 2.205 Pounds', '1 Ton = 2000 
 
 const ConversionPage = (props) => {
 
-    const [currentList, setCurrentList] = useState() 
+    const [currentList, setCurrentList] = useState(vol) 
 
     useEffect(()=>{
         if(props.currentUnit === 'Volume'){
