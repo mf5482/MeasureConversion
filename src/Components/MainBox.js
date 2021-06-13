@@ -103,10 +103,10 @@ const MainBox = () => {
                                     </div>
                                 </div>
                             <Button variant="primary" id='submit' type='submit' onClick={onSubmit}>Convert</Button>
-                            <Link to="/c">Example Conversions</Link>
+                            <Link to="/common">Common Conversions</Link>
                             </>
                         )} />
-                        <Route path='/c' exact render={()=>(
+                        <Route path='/common' exact render={()=>(
                             <>
                                 <ConversionPage currentUnit={currentUnit}/>
                                 <Link to="/">Back</Link>
