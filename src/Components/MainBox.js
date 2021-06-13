@@ -4,6 +4,8 @@ import {useState} from 'react'
 import {useEffect} from 'react'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
+import { BrowserRouter, Route, Link } from 'react-router-dom'
+import ConversionPage from './ConversionPage'
 
 const units = ['Volume', 'Length', 'Weight']
 const volume = ['Gallons', 'Liters', 'Quarts', 'Pints', 'Cups', 'Milliliters', 'Fluid Ounces']
@@ -82,20 +84,35 @@ const MainBox = () => {
         <Form>
             <Form.Group>
                 <div className='mainBox'>
-                    <h3>Measurement Conversion</h3>
-                    <Dropdown id='unit' list={units} onChange = {onUnitChange}></Dropdown>
-                        <div class='conver'>
-                            <div className='sent'>
-                                <input type="number" onChange={onInitChange} value={init}></input>
-                                <Dropdown selected={currentFrom} list={currentList} onChange={onFromChange}></Dropdown>
-                            </div>
-                            <h1>=</h1>
-                            <div className='sent'>
-                                <input readonly type="number" value={result}></input>
-                                <Dropdown selected={currentTo} list = {currentList} onChange={onToChange}></Dropdown>
-                            </div>
-                        </div>
-                    <Button variant="primary" id='submit' type='submit' onClick={onSubmit}>Convert</Button>
+                    <div className='header'>
+                        <h3>Measurement Conversion</h3>
+                        <Dropdown id='unit' list={units} onChange = {onUnitChange}></Dropdown>
+                    </div>
+                    <BrowserRouter>
+                        <Route path='/' exact render={()=>(
+                            <>
+                                <div class='conver'>
+                                    <div className='sent'>
+                                        <input type="number" onChange={onInitChange} value={init}></input>
+                                        <Dropdown selected={currentFrom} list={currentList} onChange={onFromChange}></Dropdown>
+                                    </div>
+                                    <h1>=</h1>
+                                    <div className='sent'>
+                                        <input readonly type="number" value={result}></input>
+                                        <Dropdown selected={currentTo} list = {currentList} onChange={onToChange}></Dropdown>
+                                    </div>
+                                </div>
+                            <Button variant="primary" id='submit' type='submit' onClick={onSubmit}>Convert</Button>
+                            <Link to="/common">Common Conversions</Link>
+                            </>
+                        )} />
+                        <Route path='/common' exact render={()=>(
+                            <>
+                                <ConversionPage currentUnit={currentUnit}/>
+                                <Link to="/">Back</Link>
+                            </>
+                        )} />
+                    </BrowserRouter>
                 </div>
             </Form.Group>
         </Form>
